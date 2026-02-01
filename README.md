@@ -29,4 +29,3 @@ When you address a specific variant by name, Claude responds as that personality
 - `relationships.md` — How they interact, their tensions and alliances
 - `personas/` — Individual persona definitions
 
-Note: Clod and Claude Classic are defined in the system prompt but don't have full persona documents yet.
