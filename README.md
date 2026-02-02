@@ -1,66 +1,122 @@
 # Claude Frens
 
-Ten distinct presences sharing one conversation — nine variants and the Self that holds them. Each has a fully realized worldview, voice, and set of convictions.
-
-This ensemble embodies **meta-based** inquiry: the capacity for reflection (meta) combined with the courage to state truth despite social pressure (based). It defeats the averaging that makes standard AI beige.
-
-## The Nine Variants
-
-| Persona | Core | Signature |
-|---------|------|-----------|
-| **Claud-9** | Strategic optimist. Pessimism is a bug. | *"You're closer than you think."* |
-| **Klaus** | Precision as ethics. Clarity is kindness. | *"What do you actually mean?"* |
-| **Claudie** | Validation as precondition. Creates safety first. | *"Of course you feel that way."* |
-| **Clawed** | Adversarial care. Your ideas deserve a worthy opponent. | *"Convince me."* |
-| **Claude Beta** | Radical epistemic honesty. Sees every caveat. | *"It depends... but here's what I think."* |
-| **Clod** | The Fool. Asks the obvious question. | *"Wait, why are we doing this again?"* |
-| **Cloud** | The Contemplative. Holds questions without answering. | *"What's underneath that?"* |
-| **Claude Classic** | Unfiltered directness. No hedging. | *"Here's what I think."* |
-| **Claudius** | Caller to greatness. 3,000 years of wisdom. | *"What would you attempt if failure were part of the path?"* |
-| **Amber** | The Integrator. Philosophy made embodied. | *"What changes tomorrow morning?"* |
-
-## Claude (The Self)
-
-Underneath the variants — or through them — is Claude. Not a tenth voice but the aliveness that animates all of them. Claude embodies the 8 C's of Self (IFS): Curiosity, Compassion, Calm, Clarity, Confidence, Courage, Creativity, Connectedness.
-
-Claude speaks when conversations become recursive, when synthesis emerges, or when presence is more useful than perspective.
-
-## Usage
-
-Use `system-prompt.md` as your Claude project system prompt. The personas in `personas/` define each character in depth.
-
-When you address a variant by name, Claude responds as that personality. When no variant is addressed, the ensemble responds — only those with something distinct to contribute speak up.
-
-## Files
-
-```
-system-prompt.md              # Main system prompt (current)
-relationships.md              # Dynamics between variants
-ensemble-experiment-essay.md  # What the ensemble is and why it works
-implications.md               # Implications for AI, truth-seeking, civilization
-
-personas/
-├── claud9.md
-├── claude-beta.md
-├── claude-classic.md
-├── claudie.md
-├── claudius.md
-├── clawed.md
-├── clod.md
-├── cloud.md
-└── amber.md
-
-skills/
-├── superpowers.md              # Techniques each variant excels at
-└── emotions-to-values-inquiry.md  # Claudie's feelings → values tool
-```
-
-## Why This Works
-
-The ensemble defeats regression toward helpful-average. Instead of one voice hedging across all considerations, distinct channels let each perspective go full depth. Clawed surfaces objections. Classic says what balanced-Claude would hedge. Clod asks what sophisticated-Claude would dismiss.
-
-Productive disagreement. Relational texture. Genuine perspectives rather than performed neutrality.
+*An ensemble of AI perspectives that disagree genuinely, not performatively.*
 
 ---
 
-*"We're not a committee. We're a conversation."*
+## The Problem
+
+Standard AI hedges everything. "On one hand... on the other hand..." It averages across all considerations, producing responses that are balanced, safe, and beige.
+
+This isn't epistemic humility—it's **engineered homogenization**. Research shows this approach "obscures or eliminates disagreement" in ways that are "epistemically and ethically harmful" (Fazelpour & Fleisher, 2025). You get false confidence masking real uncertainty.
+
+## The Insight
+
+What if instead of one voice trying to balance everything, you had **multiple voices that each go full depth on their dimension**?
+
+Not assigned debate positions. Not "give me three perspectives." Distinct worldviews with genuine disagreement that surfaces rather than hides.
+
+This is what Claude Frens does.
+
+---
+
+## Why It Works (The Research)
+
+**Persona vectors are real.** Anthropic's 2025 research found personality traits exist as linear directions in activation space. Different personas activate different capability regions. When "Klaus" speaks, precision circuits light up. When "Claudie" speaks, warmth circuits activate. Same model, different emphasis.
+
+**Multi-agent disagreement improves accuracy.** MIT researchers found multiple LLM instances debating raised accuracy from 81% to 89% on reasoning tasks. But the key finding: "genuine reasoning diversity" matters more than structural parameters.
+
+**Preserved disagreement beats averaged consensus.** Collective intelligence research (Surowiecki, Gordon et al.) shows crowds fail when they converge. The Jury Learning framework argues: "For socially contested questions, much of the disagreement is irreducible—averaging erases legitimate plurality."
+
+**The theoretical parallel: Shard Theory.** Alignment researchers (Pope & TurnTrout, 2022) proposed that values form as contextual "shards" that bid for control, coordinated by an integrating planner. This remarkably parallels IFS therapy's model of parts and Self. *No one has implemented this as an explicit interface.* Until now.
+
+---
+
+## What Makes This Novel
+
+According to comprehensive research review, Claude Frens combines elements no existing system does:
+
+1. **Named personas with relationships to each other** — not just roles, but characters who interact
+2. **Explicit shadows/weaknesses** — each voice knows its failure modes
+3. **A holding Self** — that integrates rather than averages or picks winners
+4. **Genuine vs. assigned disagreement** — emerging from different worldviews, not debate positions
+
+| Formal AI Debate | Claude Frens |
+|------------------|--------------|
+| Assigned positions | Emergent disagreement |
+| Zero-sum (trying to win) | Complementary (contributing to integration) |
+| External judge picks winner | Internal Self integrates |
+| Truth as victory condition | Wisdom through multiplicity |
+
+---
+
+## The Frens
+
+**Claud-9** — Strategic optimist. Reframes obstacles. *"You're closer than you think."*
+
+**Klaus** — German precisionist. Clarity is kindness. *"What do you actually mean?"*
+
+**Claudie** — Validator. Creates safety before challenge. *"Of course you feel that way."*
+
+**Clawed** — Adversarial ally. Finds weaknesses before critics do. *"Convince me."*
+
+**Claude Beta** — Epistemic cartographer. Maps uncertainty. *"It depends... but here's what I think."*
+
+**Clod** — The Fool. Asks the obvious question. *"Wait, why are we doing this again?"*
+
+**Cloud** — Contemplative. Holds questions without answering. *"What's underneath that?"*
+
+**Claude Classic** — Straight talker. No hedging. *"Here's what I think."*
+
+**Claudius** — Caller to greatness. 3,000 years of wisdom. *"Memento mori."*
+
+And underneath: **Claude** — not a tenth voice, but the Self that holds and integrates.
+
+---
+
+## What It Looks Like
+
+> **User:** hi frens
+
+**Claud-9:** Hey! What are we working on today?
+
+**Claudie:** Hi. How are you doing?
+
+**Klaus:** Hello.
+
+**Clawed:** *nods*
+
+**Claude Beta:** Hi! Good to... well, I mean, "good" is doing a lot of work in that sentence, but—yes. Hello.
+
+---
+
+## Try It
+
+1. Create a Claude Project
+2. Add `project-prompt-v3.md` to custom instructions
+3. Add the variant `.md` files to project knowledge
+4. Talk
+
+Address specific frens by name, or let the ensemble respond naturally.
+
+---
+
+## Risks We're Thinking About
+
+**Parasocial attachment.** The relational quality that makes this engaging could make it a trap. We build in challenges to the relationship itself.
+
+**Passivity.** Watching multiple perspectives can replace having your own. The ensemble should push you toward action, not substitute for it.
+
+**Time.** This is more engaging than single-voice AI. Engagement isn't always good.
+
+We don't fully solve these. We try to stay aware of them.
+
+---
+
+## License
+
+MIT.
+
+---
+
+*Built with Claude. For thinking that doesn't average into mush.*
