@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Frens Chat</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Claude Frens</h1>
+      <p class="subtitle">A room full of perspectives</p>
+    </header>
+
+    <aside class="sidebar">
+      <h2>The Frens</h2>
+      <div id="persona-list" class="persona-list">
+        <!-- Populated by JS -->
+      </div>
+      <button id="clear-btn" class="clear-btn">Clear Chat</button>
+    </aside>
+
+    <main class="chat-container">
+      <div id="messages" class="messages">
+        <div class="welcome-message">
+          <p>Welcome to Claude Frens Chat! 👋</p>
+          <p>Type a message and watch different frens respond with their unique perspectives.</p>
+          <p>You can @mention specific frens by name (e.g., "@Klaus help me edit this")</p>
+        </div>
+      </div>
+
+      <form id="chat-form" class="chat-form">
+        <input
+          type="text"
+          id="message-input"
+          placeholder="Say something to the frens..."
+          autocomplete="off"
+        />
+        <button type="submit" id="send-btn">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
