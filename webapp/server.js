@@ -91,12 +91,21 @@ async function generatePersonaResponse(personaId, conversationHistory, userMessa
   if (!persona) return null;
 
   // Build messages for this persona
-  const messages = conversationHistory.map(msg => ({
-    role: msg.role === 'user' ? 'user' : 'assistant',
-    content: msg.role === 'user'
-      ? msg.content
-      : `[${personas[msg.persona]?.name || 'Unknown'}]: ${msg.content}`
-  }));
+  // Key: THIS persona's past messages = assistant role
+  //      OTHER personas' messages = user role (so model doesn't echo the format)
+  //      User messages = user role
+  const messages = conversationHistory.map(msg => {
+    if (msg.role === 'user') {
+      return { role: 'user', content: msg.content };
+    } else if (msg.persona === personaId) {
+      // This persona's own past messages
+      return { role: 'assistant', content: msg.content };
+    } else {
+      // Other persona's message - treat as user message with name
+      const otherName = personas[msg.persona]?.name || 'Another fren';
+      return { role: 'user', content: `[${otherName} said]: ${msg.content}` };
+    }
+  });
 
   // Add current user message if not already included
   if (messages.length === 0 || messages[messages.length - 1].content !== userMessage) {
@@ -141,13 +150,18 @@ function parseMentions(message) {
   return mentions;
 }
 
-// API: Send message and get responses
-app.post('/api/chat', async (req, res) => {
-  const { sessionId, message } = req.body;
+// API: Send message and get responses (SSE streaming)
+app.get('/api/chat/stream', async (req, res) => {
+  const { sessionId, message } = req.query;
 
   if (!message) {
     return res.status(400).json({ error: 'Message required' });
   }
+
+  // Set up SSE
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
 
   // Get or create session
   if (!sessions.has(sessionId)) {
@@ -165,12 +179,15 @@ app.post('/api/chat', async (req, res) => {
   const speakers = await decideWhoSpeaks(history, mentions);
   console.log(`Speakers selected: ${speakers.join(', ')}`);
 
+  // Send who's speaking first
+  res.write(`data: ${JSON.stringify({ type: 'speakers', speakers })}\n\n`);
+
   // Generate responses from each speaker (in sequence for natural flow)
-  const responses = [];
   for (const speakerId of speakers) {
     const response = await generatePersonaResponse(speakerId, history, message);
     if (response) {
-      responses.push(response);
+      // Send this response immediately
+      res.write(`data: ${JSON.stringify({ type: 'response', ...response })}\n\n`);
       // Add to history so next persona sees it
       history.push({
         role: 'assistant',
@@ -180,12 +197,14 @@ app.post('/api/chat', async (req, res) => {
     }
   }
 
+  // Signal done
+  res.write(`data: ${JSON.stringify({ type: 'done' })}\n\n`);
+  res.end();
+
   // Keep history manageable
   if (history.length > 50) {
     sessions.set(sessionId, history.slice(-40));
   }
-
-  res.json({ responses });
 });
 
 // API: Get all personas (for UI)

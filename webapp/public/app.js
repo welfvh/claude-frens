@@ -85,27 +85,44 @@ async function handleSubmit(e) {
   showTypingIndicator();
 
   try {
-    const res = await fetch(`${API_BASE}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId, message })
-    });
+    // Use SSE for streaming responses
+    const url = `${API_BASE}/api/chat/stream?sessionId=${encodeURIComponent(sessionId)}&message=${encodeURIComponent(message)}`;
+    const eventSource = new EventSource(url);
 
-    const data = await res.json();
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
 
-    // Remove typing indicator
-    hideTypingIndicator();
-
-    // Add responses with staggered animation
-    for (let i = 0; i < data.responses.length; i++) {
-      const response = data.responses[i];
-      setTimeout(() => {
+      if (data.type === 'speakers') {
+        // Update typing indicator with who's thinking
+        updateTypingIndicator(data.speakers);
+      } else if (data.type === 'response') {
+        // Add response immediately
         addMessage({
           role: 'assistant',
-          ...response
+          persona: data.persona,
+          name: data.name,
+          emoji: data.emoji,
+          color: data.color,
+          content: data.content
         });
-      }, i * 300);
-    }
+      } else if (data.type === 'done') {
+        hideTypingIndicator();
+        eventSource.close();
+      }
+    };
+
+    eventSource.onerror = (e) => {
+      console.error('SSE error:', e);
+      hideTypingIndicator();
+      eventSource.close();
+      addMessage({
+        role: 'assistant',
+        name: 'System',
+        emoji: '⚠️',
+        color: '#ff6b6b',
+        content: 'Sorry, something went wrong. Please try again.'
+      });
+    };
 
   } catch (e) {
     console.error('Chat error:', e);
@@ -165,6 +182,18 @@ function showTypingIndicator() {
   `;
   messagesEl.appendChild(indicator);
   scrollToBottom();
+}
+
+// Update typing indicator with speaker names
+function updateTypingIndicator(speakerIds) {
+  const indicator = document.getElementById('typing-indicator');
+  if (indicator) {
+    const names = speakerIds.map(id => {
+      const p = personas.find(p => p.id === id);
+      return p ? p.name : id;
+    }).join(', ');
+    indicator.querySelector('.typing-text').textContent = `${names} thinking...`;
+  }
 }
 
 // Hide typing indicator
