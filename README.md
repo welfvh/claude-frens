@@ -115,7 +115,7 @@ We don't fully solve these. We try to stay aware of them.
 
 ## License
 
-MIT.
+Personal use only. See [LICENSE](LICENSE).
 
 ---
 
